@@ -1120,9 +1120,6 @@ public class GitSCM extends SCM implements Serializable {
         environment.put(GIT_COMMIT, revToBuild.getSha1String());
         Branch branch = revToBuild.getBranches().iterator().next();
         environment.put(GIT_BRANCH, branch.getName());
-        // FilePath ws = new FilePath(localWorkspace);
-        // environment.put(GIT_URL, ws.getRemote());
-        // environment.put(GIT_URL, remoteRepository.getName());
 
         BuildData returnedBuildData;
         if (mergeOptions.doMerge() && !revToBuild.containsBranchName(mergeOptions.getRemoteBranchName())) {
