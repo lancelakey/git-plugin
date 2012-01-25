@@ -996,6 +996,7 @@ public class GitSCM extends SCM implements Serializable {
                 FilePath ws = new FilePath(localWorkspace);
                 final PrintStream log = listener.getLogger();
                 log.println("Checkout:" + ws.getName() + " / " + ws.getRemote() + " - " + ws.getChannel());
+                environment.put(GIT_URL, ws.getRemote());
                 IGitAPI git = new GitAPI(gitExe, ws, listener, environment, reference);
 
                 if (wipeOutWorkspace) {
@@ -1119,7 +1120,9 @@ public class GitSCM extends SCM implements Serializable {
         environment.put(GIT_COMMIT, revToBuild.getSha1String());
         Branch branch = revToBuild.getBranches().iterator().next();
         environment.put(GIT_BRANCH, branch.getName());
-        environment.put(GIT_URL, ws.getRemote());
+        // FilePath ws = new FilePath(localWorkspace);
+        // environment.put(GIT_URL, ws.getRemote());
+        // environment.put(GIT_URL, remoteRepository.getName());
 
         BuildData returnedBuildData;
         if (mergeOptions.doMerge() && !revToBuild.containsBranchName(mergeOptions.getRemoteBranchName())) {
