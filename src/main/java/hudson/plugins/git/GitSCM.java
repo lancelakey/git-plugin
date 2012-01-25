@@ -134,6 +134,7 @@ public class GitSCM extends SCM implements Serializable {
     private Collection<SubmoduleConfig> submoduleCfg;
     public static final String GIT_BRANCH = "GIT_BRANCH";
     public static final String GIT_COMMIT = "GIT_COMMIT";
+    public static final String GIT_URL = "GIT_URL";
     private String relativeTargetDir;
     private String reference;
     private String excludedRegions;
@@ -1118,6 +1119,7 @@ public class GitSCM extends SCM implements Serializable {
         environment.put(GIT_COMMIT, revToBuild.getSha1String());
         Branch branch = revToBuild.getBranches().iterator().next();
         environment.put(GIT_BRANCH, branch.getName());
+        environment.put(GIT_URL, ws.getRemote());
 
         BuildData returnedBuildData;
         if (mergeOptions.doMerge() && !revToBuild.containsBranchName(mergeOptions.getRemoteBranchName())) {
